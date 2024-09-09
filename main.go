@@ -23,6 +23,7 @@ func main() {
 	display(libraryName)
 
 	// create a newBook variable
+
 	newBook := book{
 		title:     "Golang101",
 		author:    "Davud Safarov",
@@ -34,9 +35,9 @@ func main() {
 
 	displayAllBook()
 
-	fmt.Println("this is a new book:")
+	addBookFromUser()
 
-	fmt.Println(newBook.title)
+	displayAllBook()
 }
 
 type book struct {
@@ -57,13 +58,33 @@ func addNewBook(newBook book) {
 func displayAllBook() {
 	for i := 0; i < len(books); i++ {
 		b := books[i]
-		fmt.Println(b.title)
+		fmt.Print(i+1, ".", b.title)
 
-		if books[i].available {
-			fmt.Println("order me now")
+		if b.available {
+			fmt.Println(" - available")
+		} else {
+			fmt.Println(" - not available")
 		}
 
 	}
+}
+
+func addBookFromUser() {
+	userBook := book{}
+
+	fmt.Println("Insert title of the book: ")
+	fmt.Scanln(&userBook.title)
+
+	fmt.Println("Insert author of the book: ")
+	fmt.Scanln(&userBook.author)
+
+	fmt.Println("Insert book's ISBN: ")
+	fmt.Scanln(&userBook.ISBN)
+
+	fmt.Println("Is the book ready to order: true/false")
+	fmt.Scanln(&userBook.available)
+
+	addNewBook(userBook)
 }
 
 // {Science101 Herr Fassbrau 12345AB true}
